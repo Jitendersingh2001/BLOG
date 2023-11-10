@@ -55,7 +55,7 @@
             <div class="divide-y divide-gray-100 dark:divide-gray-700">
               <a href="#" class="flex px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700">
                 <div class="flex-shrink-0">
-                  <img class="rounded-full w-11 h-11" src="/docs/images/people/profile-picture-1.jpg" alt="Jese image" />
+                  <img class="rounded-full w-11 h-11" src="/storage/upload/admin.jpg" alt="Jese image" />
                   <div class="absolute flex items-center justify-center w-5 h-5 ml-6 -mt-5 bg-blue-600 border border-white rounded-full dark:border-gray-800">
                     <svg class="w-2 h-2 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
                       <path d="M1 18h16a1 1 0 0 0 1-1v-6h-4.439a.99.99 0 0 0-.908.6 3.978 3.978 0 0 1-7.306 0 .99.99 0 0 0-.908-.6H0v6a1 1 0 0 0 1 1Z" />
@@ -84,9 +84,9 @@
             </a>
           </div>
 
-          <div class="px-4 py-3" role="none">
-            <p class="text-sm text-gray-900 dark:text-white" role="none">
-              Neil Sims
+          <div class="px-1 py-3">
+            <p class="text-sm text-gray-900 dark:text-white admin-name">
+
             </p>
             <!-- <p class="text-sm font-medium text-gray-900 truncate dark:text-gray-300" role="none">
                   neil.sims@flowbite.com
@@ -97,7 +97,7 @@
               <div>
                 <button type="button" class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" aria-expanded="false" data-dropdown-toggle="dropdown-user">
                   <span class="sr-only">Open user menu</span>
-                  <img class="w-8 h-8 rounded-full" src="assets/img/user.png" alt="user photo" />
+                  <img class="w-8 h-8 rounded-full admin-profile-pic" src="assets/img/user.png" alt="user photo" />
                 </button>
               </div>
               <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600" id="dropdown-user">
@@ -313,7 +313,7 @@
                 </button>
               </li>
               <li>
-                <button class="px-3 py-1 text-white transition-colors duration-150 bg-purple-600 border border-r-0 border-purple-600 rounded-md focus:outline-none focus:shadow-outline-purple">
+                <button class="px-3 py-1 text-white transition-colors duration-150 bg-blue-700 border border-r-0 border-blue-700 rounded-md focus:outline-none focus:shadow-outline-purple">
                   3
                 </button>
               </li>

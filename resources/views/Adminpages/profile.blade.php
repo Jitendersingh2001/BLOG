@@ -55,7 +55,7 @@
                         <div class="divide-y divide-gray-100 dark:divide-gray-700">
                             <a href="#" class="flex px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700">
                                 <div class="flex-shrink-0">
-                                    <img class="rounded-full w-11 h-11" src="/docs/images/people/profile-picture-1.jpg" alt="Jese image" />
+                                    <img class="rounded-full w-11 h-11" src="/storage/upload/admin.jpg" alt="Jese image" />
                                     <div class="absolute flex items-center justify-center w-5 h-5 ml-6 -mt-5 bg-blue-600 border border-white rounded-full dark:border-gray-800">
                                         <svg class="w-2 h-2 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
                                             <path d="M1 18h16a1 1 0 0 0 1-1v-6h-4.439a.99.99 0 0 0-.908.6 3.978 3.978 0 0 1-7.306 0 .99.99 0 0 0-.908-.6H0v6a1 1 0 0 0 1 1Z" />
@@ -84,9 +84,9 @@
                         </a>
                     </div>
 
-                    <div class="px-4 py-3" role="none">
-                        <p class="text-sm text-gray-900 dark:text-white" role="none">
-                            Neil Sims
+                    <div class="px-1 py-3">
+                        <p class="text-sm text-gray-900 dark:text-white admin-name">
+
                         </p>
                         <!-- <p class="text-sm font-medium text-gray-900 truncate dark:text-gray-300" role="none">
                   neil.sims@flowbite.com
@@ -97,7 +97,7 @@
                             <div>
                                 <button type="button" class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" aria-expanded="false" data-dropdown-toggle="dropdown-user">
                                     <span class="sr-only">Open user menu</span>
-                                    <img class="w-8 h-8 rounded-full" src="assets/img/user.png" alt="user photo" />
+                                    <img class="w-8 h-8 rounded-full admin-profile-pic" src="assets/img/user.png" alt="user photo" />
                                 </button>
                             </div>
                             <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600" id="dropdown-user">
@@ -199,24 +199,35 @@
         </div>
         <div class="mt-5 border border-gray-300 p-5 rounded-md  dark:border-gray-700">
 
-            <form>
-                <div>
-                    <img class="rounded w-36 h-36" src="assets/img/logo.jpg" alt="Extra large avatar">
+            <form id="Admin-profile-form">
+                <div class="mb-4">
+                    <img class="rounded w-36 h-36 admin-profile-pic" src="assets/img/user.png" alt="Extra large avatar">
                 </div>
                 <div class="mb-6">
                     <label for="user-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
-                    <input type="text" id="user-name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600  dark:text-white dark:focus:ring-blue-500 cursor-not-allowed dark:focus:border-blue-500" disabled>
+                    <input type="text" id="user-name" class="bg-gray-50 border admin-name border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600  dark:text-white dark:focus:ring-blue-500 cursor-not-allowed dark:focus:border-blue-500" disabled>
                 </div>
                 <div class="mb-6">
                     <label for="user-email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
-                    <input type="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white cursor-not-allowed dark:focus:ring-blue-500 dark:focus:border-blue-500" disabled>
+                    <input type="email" id="email" class="bg-gray-50 border admin-email border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white cursor-not-allowed dark:focus:ring-blue-500 dark:focus:border-blue-500" disabled>
                 </div>
                 <div class="mb-6">
                     <label for="user-phoneNo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">phone No</label>
-                    <input type="number" id="user-phoneNo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600  dark:text-white dark:focus:ring-blue-500 cursor-not-allowed dark:focus:border-blue-500" disabled>
+                    <input type="number" id="user-phoneNo" class="bg-gray-50 border admin-phoneno border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600  dark:text-white dark:focus:ring-blue-500 cursor-not-allowed dark:focus:border-blue-500" disabled>
                 </div>
-                <div class="flex justify-between">
-                    <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Edit</button>
+                <div class="Admin-password hide">
+                    <div class="mb-6">
+                        <label for="user-password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Current Password</label>
+                        <input type="Password" id="user-password" class="bg-gray-50 border admin-Password border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600  dark:text-white dark:focus:ring-blue-500 cursor-not-allowed dark:focus:border-blue-500" placeholder="Type Your Current Password" disabled>
+                    </div>
+                </div>
+                <div class="flex Admin-profile-action">
+                    <button type="submit" class="Admin-profile-edit-btn text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Edit</button>
+                    <div class="flex gap-2 Admin-profile-action-2 hide">
+                        <button type="submit" class=" Admin-profile-cancel-btn text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">Cancel</button>
+                        <button type="submit" class=" Admin-profile-save-btn text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Save</button>
+                    </div>
+
                 </div>
 
             </form>
