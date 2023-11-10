@@ -169,88 +169,55 @@
   </aside>
 
   <!-- Sidebar end -->
-
-  <!-- MAIN CONTAINER -->
-
-  <div class="p-4 sm:ml-64 mt-14 dashboard-container ">
-    <!-- Dashboard start -->
-
-    <div class="dashboard-heading pt-2">
-      <h1 class="text-3xl font-bold dark:text-white">Dashboard</h1>
+  <!-- USER START -->
+  <div class="p-4 sm:ml-64 mt-14 user-container ">
+    <!-- USER CONTAINER NAVBAR -->
+    <nav class="flex mb-5 pt-2" aria-label="Breadcrumb">
+      <ol class="inline-flex items-center space-x-1 text-sm font-medium md:space-x-2">
+        <li class="inline-flex items-center">
+          <a href="#" class="inline-flex items-center text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-white">
+            <svg class="w-5 h-5 mr-2.5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
+            </svg>
+            Home
+          </a>
+        </li>
+        <li>
+          <div class="flex items-center">
+            <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+            </svg>
+            <span class="ml-1 text-gray-400 md:ml-2 cursor-pointer dark:text-gray-500" aria-current="page">Users</span>
+          </div>
+        </li>
+      </ol>
+    </nav>
+    <!-- USER CONTAINER HEADING -->
+    <div class="blog-heading">
+      <h1 class="text-3xl font-bold dark:text-white">All Users</h1>
     </div>
-
-    <!-- Dashborad total container -->
-
+    <!-- USER CONATINER SERACH BAR -->
     <div class="pt-5">
-      <div class="flex">
-        <!-- Card 1 -->
-        <div class="flex gap-3 items-center p-4 mb-8 mr-4 bg-white rounded-lg w-64 border border-gray-300 shadow-xs dark:border-gray-700 dark:bg-gray-800">
-          <div class="p-3 mr-4 text-orange-500 bg-orange-100 rounded-full dark:text-orange-100 dark:bg-orange-500">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+      <form class="flex items-center">
+        <label for="simple-search" class="sr-only">Search</label>
+        <div class="relative w-full">
+          <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5v10M3 5a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 10a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm12 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm0 0V6a3 3 0 0 0-3-3H9m1.5-2-2 2 2 2" />
             </svg>
           </div>
-          <div>
-            <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-              Total Users
-            </p>
-            <p class="text-lg font-semibold text-gray-700 dark:text-gray-200 total-user-count">
-              6389
-            </p>
-          </div>
+          <input type="text" id="Blog-search-bar" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search Blog" />
         </div>
-        <!-- Card 2 -->
-        <div class="flex gap-3 items-center p-4 mb-8 mr-4 bg-white rounded-lg w-64 border border-gray-300 shadow-xs dark:border-gray-700 dark:bg-gray-800">
-          <div class="p-3 mr-4 text-green-500 bg-green-100 rounded-full dark:text-green-100 dark:bg-green-500">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
-              <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-            </svg>
-          </div>
-          <div>
-            <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-              Total Views
-            </p>
-            <p class="text-lg font-semibold text-gray-700 dark:text-gray-200 total-views-count">
-              2500
-            </p>
-          </div>
-        </div>
-        <!-- Card 3 -->
-        <div class="flex gap-3 items-center p-4 mb-8 mr-4 bg-white rounded-lg w-64 border border-gray-300 shadow-xs dark:border-gray-700 dark:bg-gray-800">
-          <div class="p-3 mr-4 text-blue-500 bg-blue-100 rounded-full dark:text-blue-100 dark:bg-blue-500">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M6.633 10.5c.806 0 1.533-.446 2.031-1.08a9.041 9.041 0 012.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 00.322-1.672V3a.75.75 0 01.75-.75A2.25 2.25 0 0116.5 4.5c0 1.152-.26 2.243-.723 3.218-.266.558.107 1.282.725 1.282h3.126c1.026 0 1.945.694 2.054 1.715.045.422.068.85.068 1.285a11.95 11.95 0 01-2.649 7.521c-.388.482-.987.729-1.605.729H13.48c-.483 0-.964-.078-1.423-.23l-3.114-1.04a4.501 4.501 0 00-1.423-.23H5.904M14.25 9h2.25M5.904 18.75c.083.205.173.405.27.602.197.4-.078.898-.523.898h-.908c-.889 0-1.713-.518-1.972-1.368a12 12 0 01-.521-3.507c0-1.553.295-3.036.831-4.398C3.387 10.203 4.167 9.75 5 9.75h1.053c.472 0 .745.556.5.96a8.958 8.958 0 00-1.302 4.665c0 1.194.232 2.333.654 3.375z" />
-            </svg>
-          </div>
-          <div>
-            <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-              Total Likes
-            </p>
-            <p class="text-lg font-semibold text-gray-700 dark:text-gray-200 total-likes-count">
-              3760
-            </p>
-          </div>
-        </div>
-        <!-- Card 4 -->
-        <div class="flex gap-3 items-center p-4 mb-8 mr-4 bg-white rounded-lg w-64 border border-gray-300 shadow-xs dark:border-gray-700 dark:bg-gray-800">
-          <div class="p-3 mr-4 text-teal-500 bg-teal-100 rounded-full dark:text-teal-100 dark:bg-teal-500">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12.76c0 1.6 1.123 2.994 2.707 3.227 1.068.157 2.148.279 3.238.364.466.037.893.281 1.153.671L12 21l2.652-3.978c.26-.39.687-.634 1.153-.67 1.09-.086 2.17-.208 3.238-.365 1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" />
-            </svg>
-          </div>
-          <div>
-            <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-              Total Comments
-            </p>
-            <p class="text-lg font-semibold text-gray-700 dark:text-gray-200 total-comments-count">
-              35
-            </p>
-          </div>
-        </div>
-      </div>
+        <button type="submit" class="p-2.5 ml-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+          <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+          </svg>
+          <span class="sr-only">Search</span>
+        </button>
+      </form>
     </div>
-    <div class="w-full overflow-hidden rounded-lg shadow-xs border border-gray-300 dark:border-gray-700">
+    <!-- USER TABLE -->
+    <div class="w-full overflow-hidden rounded-lg mt-5  shadow-xs border border-gray-300 dark:border-gray-700">
       <div class="w-full overflow-x-auto">
         <table class="w-full whitespace-no-wrap">
           <thead>
@@ -258,7 +225,8 @@
               <th class="px-4 py-3">User</th>
               <th class="px-4 py-3">Email</th>
               <th class="px-4 py-3">Phone No</th>
-              <th class="px-4 py-3">Date</th>
+              <th class="px-4 py-3">Status</th>
+              <th class="px-4 py-3">Action</th>
             </tr>
           </thead>
           <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800 user-table-content">
@@ -283,8 +251,97 @@
                   7404937530
                 </span>
               </td>
+              <td class="px-4 py-3 text-xs">
+                <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">
+                  Active
+                </span>
+              </td>
+              <td class="px-4 py-3 text-sm blog-action">
+                <div class="relative hidden w-8 h-8 mr-3 rounded-full md:block">
+                  <img class="object-cover w-full h-full cursor-pointer rounded-full" src="assets/img/3dotmenu.png" alt="action" loading=" lazy" data-dropdown-toggle="Action-user-dropdown" />
+                </div>
+                <!--Action Dropdown menu -->
+                <div id="Action-user-dropdown" class="z-10 border border-gray-300 dark:border-gray-700 hidden p-1 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                  <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
+                    <li>
+                      <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 group">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white">
+                          <path d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712zM19.513 8.199l-3.712-3.712-8.4 8.4a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32l8.4-8.4z" />
+                          <path d="M5.25 5.25a3 3 0 00-3 3v10.5a3 3 0 003 3h10.5a3 3 0 003-3V13.5a.75.75 0 00-1.5 0v5.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5V8.25a1.5 1.5 0 011.5-1.5h5.25a.75.75 0 000-1.5H5.25z" />
+                        </svg>
+
+                        <span class="ml-3">Edit</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 group">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white">
+                          <path fill-rule="evenodd" d="M6.72 5.66l11.62 11.62A8.25 8.25 0 006.72 5.66zm10.56 12.68L5.66 6.72a8.25 8.25 0 0011.62 11.62zM5.105 5.106c3.807-3.808 9.98-3.808 13.788 0 3.808 3.807 3.808 9.98 0 13.788-3.807 3.808-9.98 3.808-13.788 0-3.808-3.807-3.808-9.98 0-13.788z" clip-rule="evenodd" />
+                        </svg>
+
+
+                        <span class="ml-3">Block</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </td>
+            </tr>
+            <tr class="text-gray-700 dark:text-gray-400">
+              <td class="px-4 py-3">
+                <div class="flex items-center text-sm">
+                  <!-- Avatar with inset shadow -->
+                  <div class="relative hidden w-8 h-8 mr-3 rounded-full md:block">
+                    <img class="object-cover w-full h-full rounded-full" src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-1.2.1&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=200&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjE3Nzg0fQ" alt="" loading="lazy" />
+                    <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
+                  </div>
+                  <div>
+                    <p class="font-semibold">Hans Burger</p>
+                  </div>
+                </div>
+              </td>
               <td class="px-4 py-3 text-sm">
-                6/10/2020
+                Random@gmail.com
+              </td>
+              <td class="px-4 py-3 text-xs">
+                <span class="px-2 py-1 text-sm">
+                  7404937530
+                </span>
+              </td>
+              <td class="px-4 py-3 text-xs">
+                <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-700">
+                  Block
+                </span>
+              </td>
+              <td class="px-4 py-3 text-sm blog-action">
+                <div class="relative hidden w-8 h-8 mr-3 rounded-full md:block">
+                  <img class="object-cover w-full h-full cursor-pointer rounded-full" src="assets/img/3dotmenu.png" alt="action" loading=" lazy" data-dropdown-toggle="Action-user-dropdown" />
+                </div>
+                <!--Action Dropdown menu -->
+                <div id="Action-user-dropdown" class="z-10 border border-gray-300 dark:border-gray-700 hidden p-1 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                  <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
+                    <li>
+                      <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 group">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white">
+                          <path d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712zM19.513 8.199l-3.712-3.712-8.4 8.4a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32l8.4-8.4z" />
+                          <path d="M5.25 5.25a3 3 0 00-3 3v10.5a3 3 0 003 3h10.5a3 3 0 003-3V13.5a.75.75 0 00-1.5 0v5.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5V8.25a1.5 1.5 0 011.5-1.5h5.25a.75.75 0 000-1.5H5.25z" />
+                        </svg>
+
+                        <span class="ml-3">Edit</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 group">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white">
+                          <path fill-rule="evenodd" d="M6.72 5.66l11.62 11.62A8.25 8.25 0 006.72 5.66zm10.56 12.68L5.66 6.72a8.25 8.25 0 0011.62 11.62zM5.105 5.106c3.807-3.808 9.98-3.808 13.788 0 3.808 3.807 3.808 9.98 0 13.788-3.807 3.808-9.98 3.808-13.788 0-3.808-3.807-3.808-9.98 0-13.788z" clip-rule="evenodd" />
+                        </svg>
+
+
+                        <span class="ml-3">Block</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
               </td>
             </tr>
           </tbody>
@@ -313,7 +370,7 @@
                 </button>
               </li>
               <li>
-                <button class="px-3 py-1 text-white transition-colors duration-150 bg-purple-600 border border-r-0 border-purple-600 rounded-md focus:outline-none focus:shadow-outline-purple">
+                <button class="px-3 py-1 text-white transition-colors duration-150 bg-blue-700 border border-r-0 border-blue-700 rounded-md focus:outline-none focus:shadow-outline-purple">
                   3
                 </button>
               </li>
@@ -348,10 +405,6 @@
       </div>
     </div>
   </div>
-
-  <!-- Dashboard end -->
-
-
 
   <!-- FLOWBITE SCRIPT -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.0.0/flowbite.min.js"></script>
