@@ -1,47 +1,61 @@
-<x-guest-layout>
-    <!-- Session Status -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>Phoenix Blog Admin Panel</title>
+    <!-- CSS LINK -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}" />
+    <!-- TOAST CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.css" integrity="sha512-8D+M+7Y6jVsEa7RD6Kv/Z7EImSpNpQllgaEIQAtqHcI0H6F4iZknRj0Nx1DCdB+TwBaS+702BGWYC0Ze2hpExQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- FLOWBITE -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.0.0/flowbite.min.css" rel="stylesheet" />
+    <!-- Scripts -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+</head>
+
+<body>
     <x-auth-session-status class="mb-4" :status="session('status')" />
+    <!-- component -->
+    <div class="flex items-center justify-center h-screen">
+        <!-- Login Container -->
+        <div class="w-96 flex-col border border-gray-300 bg-white px-6 pb-20 pt-14 shadow-md rounded-[4px] ">
+            <div class="mb-5 flex justify-center">
+                <img class="w-24" src="assets/img/logo.jpg" alt="Logo" />
+            </div>
+            <div class="text-center mb-8">
+                <h2 class="text-2xl font-bold ">
+                    Login In To Your Account
+                </h2>
+            </div>
+            <div class="flex flex-col text-sm rounded-md">
+                <!-- method="POST" action="{{ route('login') }}" -->
+                <form id="LoginFom">
+                    @csrf
+                    <input class="mb-5 w-full rounded-[4px] border p-3 hover:outline-none focus:outline-none hover:border-yellow-500 " id="login-email" type="email" name="email" placeholder="Enter Your Email id" />
 
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
+                    <input class="border rounded-[4px] p-3 w-full hover:outline-none focus:outline-none hover:border-yellow-500" type="password" name="password" id="login-password" placeholder="Enter Password" />
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                    <button class="mt-5 w-full border p-2  bg-blue-600 text-white rounded-[4px] hover:bg-blue-800 scale-105 duration-300 login-btn" type="submit">Sign in</button>
+                </form>
+            </div>
+            <div class="mt-5 flex justify-end text-sm  text-gray-600">
+                <!-- <a href="{{ route('password.request') }}">Forgot password?</a> -->
+                <a href="{{ route('register') }}">Register</a>
+            </div>
+
         </div>
+    </div>
+    <!-- JQUERY CDN LINK -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <!-- TOAST JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js" integrity="sha512-zlWWyZq71UMApAjih4WkaRpikgY9Bz1oXIW5G0fED4vk14JjGlQ1UmkGM392jEULP8jbNMiwLWdM8Z87Hu88Fw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- FLOWBITE SCRIPT -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.0.0/flowbite.min.js"></script>
+    <!-- JAVASCRIPT/JQUERY LINK -->
+    <script src="{{ asset('assets/js/AuthScript.js') }}"></script>
+</body>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800" name="remember">
-                <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Remember me') }}</span>
-            </label>
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
-
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+</html>

@@ -54,6 +54,12 @@ $(document).ready(function () {
     }
     // FUNCTION TO LOAD USERS AND ADMIN DETAIL
     function LoadUsers() {
+        $.toast({
+            heading: "Success",
+            text: "Login Successfully",
+            showHideTransition: "slide",
+            icon: "success",
+        });
         $.ajax({
             url: "/GetUsers",
             type: "GET",
