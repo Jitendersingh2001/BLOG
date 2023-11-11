@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,13 +25,13 @@ Route::get('/dashboard', function () {
 });
 
 Route::get('/Blogs', function () {
-    return view('AdminPages.Blogs');
+    return view('Adminpages.blogs');
 });
 Route::get('/Users', function () {
-    return view('AdminPages.users');
+    return view('Adminpages.users');
 });
 Route::get('/AdminProfile', function () {
-    return view('AdminPages.profile');
+    return view('Adminpages.profile');
 });
 
 
@@ -41,5 +41,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 Route::get('/GetUsers', [AdminController::class, 'getUsers']);
-
+Route::get('/getCategories', [BlogController::class, 'GetCategory']);
+Route::get('/GetBlogs', [BlogController::class, 'GetBlogs']);
+Route::post('/CreateBlog', [BlogController::class, 'CreateBlog']);
+Route::get('/editBlog/{id}', [BlogController::class, 'GetBlog']);
+Route::delete('/blog/{id}', [BlogController::class, 'DeleteBlog']);
+Route::post('/updateBlog', [BlogController::class, 'UpdateBlog']);
+Route::get('/GetSarchedBlogs/{keyword}', [BlogController::class, 'GetSearchedBlogs']);
 require __DIR__ . '/auth.php';
