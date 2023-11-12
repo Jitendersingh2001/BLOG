@@ -4,7 +4,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\Auth;
+use App\Models\Role;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,10 +18,18 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    if (Auth::check()) {
+        $user = Auth::user();
+        $userRole = $user->roles->role;
+        if ($userRole && $userRole == ROLE::ADMIN) {
+            return redirect()->route('admin.dashboard');
+        }
+    }
     return view('Home');
 });
 
-Route::group(['middleware' => 'auth'], function () {
+
+Route::group(['middleware' => ['auth', 'isAdmin']], function () {
     Route::get('/dashboard', function () {
         return view('AdminPanel');
     })->name('admin.dashboard');
@@ -40,11 +49,9 @@ Route::group(['middleware' => 'auth'], function () {
 
 
 
-
-
-
-
-
+Route::get('/Access', function () {
+    return view('Access');
+});
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

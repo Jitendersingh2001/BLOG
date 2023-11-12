@@ -32,7 +32,6 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
         $userRole = Auth::user()->roles->role;
         $redirectUrl = ($userRole == Role::ADMIN) ? route('admin.dashboard') : '/';
-
         return response()->json(["url" => $redirectUrl]);
     }
 
@@ -48,6 +47,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/login');
+        return redirect('/');
     }
 }
