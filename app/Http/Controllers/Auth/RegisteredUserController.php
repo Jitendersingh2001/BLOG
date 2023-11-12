@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Role;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
@@ -45,6 +46,10 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
             'phone_no' => $request->phone_no,
             'Image' => $targetFileupload,
+        ]);
+        Role::create([
+            'user_id' => $user->id,
+            'role' => 'user',
         ]);
         event(new Registered($user));
 

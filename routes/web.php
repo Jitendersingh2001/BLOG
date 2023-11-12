@@ -17,22 +17,32 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('AdminPanel');
+    return view('Home');
 });
 
-Route::get('/dashboard', function () {
-    return view('AdminPanel');
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/dashboard', function () {
+        return view('AdminPanel');
+    })->name('admin.dashboard');
+
+    Route::get('/Blogs', function () {
+        return view('Adminpages.blogs');
+    })->name('admin.blogs');
+
+    Route::get('/Users', function () {
+        return view('Adminpages.users');
+    })->name('admin.users');
+
+    Route::get('/AdminProfile', function () {
+        return view('Adminpages.profile');
+    })->name('admin.profile');
 });
 
-Route::get('/Blogs', function () {
-    return view('Adminpages.blogs');
-});
-Route::get('/Users', function () {
-    return view('Adminpages.users');
-});
-Route::get('/AdminProfile', function () {
-    return view('Adminpages.profile');
-});
+
+
+
+
+
 
 
 Route::middleware('auth')->group(function () {

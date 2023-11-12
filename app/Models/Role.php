@@ -9,6 +9,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Role extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'user_id',
+        'role',
+
+    ];
+
     const ADMIN = 'admin';
     const USER = 'user';
     public function user(): BelongsTo

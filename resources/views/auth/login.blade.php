@@ -33,7 +33,7 @@
             <div class="flex flex-col text-sm rounded-md">
                 <!-- method="POST" action="{{ route('login') }}" -->
                 <form id="LoginFom">
-                    @csrf
+
                     <input class="mb-5 w-full rounded-[4px] border p-3 hover:outline-none focus:outline-none hover:border-yellow-500 " id="login-email" type="email" name="email" placeholder="Enter Your Email id" />
 
                     <input class="border rounded-[4px] p-3 w-full hover:outline-none focus:outline-none hover:border-yellow-500" type="password" name="password" id="login-password" placeholder="Enter Password" />

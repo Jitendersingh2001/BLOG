@@ -101,7 +101,8 @@ $(document).ready(function () {
                         showHideTransition: "slide",
                         icon: "success",
                         hideAfter: 1000,
-                        afterhde: function () {
+                        afterHidden: function () {
+                            console.log("hlo");
                             window.location.href = data.url;
                         },
                     });
