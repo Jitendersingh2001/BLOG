@@ -2,8 +2,11 @@ $(document).ready(function () {
     let admindata;
     let BlogId,
         currentpage = 0,
-        nextpage = 1;
-
+        nextpage = 1,
+        UserId;
+    const emailRegex =
+        /^[a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+)*@[a-zA-Z]+(?:\.[a-zA-Z]+)*$/;
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
     // FUNCTION TO DISPLAY ADMIN DEATILS
     function DisplayAdmin(data) {
         $(".admin-name").val(data.AdminUser.name);
@@ -11,6 +14,98 @@ $(document).ready(function () {
         $(".admin-email").val(data.AdminUser.email);
         $(".admin-phoneno").val(data.AdminUser.phone_no);
     }
+    // Function to Display Users Detail on DashBoard page
+    function DisplayUsers(data) {
+        let container = $(".user-table-content");
+        Showpagination(data);
+        container.empty();
+        $.each(data, function (index, User) {
+            const formattedDate = new Date(User.created_at).toLocaleDateString(
+                "en-GB"
+            );
+            container.append(`<tr class="text-gray-700 dark:text-gray-400">
+            <td class="px-4 py-3">
+              <div class="flex items-center text-sm">
+                <!-- Avatar with inset shadow -->
+                <div class="relative hidden w-8 h-8 mr-3 rounded-full md:block">
+                  <img class="object-cover w-full h-full rounded-full" src="${User.Image}" alt="" loading="lazy" />
+                  <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
+                </div>
+                <div>
+                  <p class="font-semibold"> ${User.name}</p>
+                </div>
+              </div>
+            </td>
+            <td class="px-4 py-3 text-sm">
+              ${User.email}
+            </td>
+            <td class="px-4 py-3 text-xs">
+              <span class="px-2 py-1 text-sm">
+              ${User.phone_no}
+              </span>
+            </td>
+            <td class="px-4 py-3 text-sm">
+            ${formattedDate}
+            </td>
+          </tr>`);
+        });
+    }
+    // Function to show display aside users
+    function DisplayAsideUsers(data) {
+        Showpagination(data);
+        let container = $(".user-aside-table-content");
+        container.empty();
+        $.each(data, function (index, User) {
+            const statusHTML =
+                User.status === "active"
+                    ? `<td class="px-4 py-3 text-xs">
+                    <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">
+                      Active
+                    </span>
+                  </td>`
+                    : `<td class="px-4 py-3 text-xs">
+                    <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-700">
+                      Block
+                    </span>
+                  </td>`;
+
+            container.append(`<tr class="text-gray-700 dark:text-gray-400">
+                <td class="px-4 py-3">
+                  <div class="flex items-center text-sm">
+                    <!-- Avatar with inset shadow -->
+                    <div class="relative hidden w-8 h-8 mr-3 rounded-full md:block">
+                      <img class="object-cover w-full h-full rounded-full" src="${User.Image}" alt="" loading="lazy" />
+                      <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
+                    </div>
+                    <div>
+                      <p class="font-semibold"> ${User.name}</p>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-4 py-3 text-sm">
+                  ${User.email}
+                </td>
+                <td class="px-4 py-3 text-xs">
+                  <span class="px-2 py-1 text-sm">
+                    ${User.phone_no}
+                  </span>
+                </td>
+               
+                ${statusHTML}
+             
+                <td class="px-4 flex justify-center py-3 text-sm blog-action">
+                            <div class="flex gap-2">
+                            <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 user-edit-btn" data-id="${User.id}">Edit</button>
+                            <button type="button" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 user-dlt-btn" data-id="${User.id}">Delete</button>
+                        </div>
+
+                            </td>
+                </tr>
+
+              `);
+        });
+    }
+
     // Function To Show error toast
     function ShowError(data) {
         $.toast({
@@ -54,23 +149,18 @@ $(document).ready(function () {
     }
     // FUNCTION TO LOAD USERS AND ADMIN DETAIL
     function LoadUsers() {
-        $.toast({
-            heading: "Success",
-            text: "Login Successfully",
-            showHideTransition: "slide",
-            icon: "success",
-        });
         $.ajax({
             url: "/GetUsers",
             type: "GET",
             success: function (data) {
                 admindata = data;
-                // console.log(data);
                 $(".admin-name").text(data.AdminUser.name);
                 if (data.AdminUser.Image !== null) {
                     $(".admin-profile-pic").attr("src", data.AdminUser.Image);
                 }
                 DisplayAdmin(data);
+                DisplayUsers(data.users);
+                DisplayAsideUsers(data.users);
             },
             error: function (err) {
                 console.log(err);
@@ -332,6 +422,7 @@ $(document).ready(function () {
     $(".serach-btn").click(function (e) {
         e.preventDefault();
         let SearchValue = $("#Blog-search-bar").val();
+
         $.ajax({
             type: "GET",
             url: `/GetSarchedBlogs/${SearchValue}`,
@@ -382,13 +473,164 @@ $(document).ready(function () {
             },
         });
     });
-
+    // Pagination next btn
     $(".nxt-btn").click(function () {
         currentpage++, nextpage++;
         DisplayBlog();
     });
+    // pagination prev btn
     $(".prv-btn").click(function () {
         currentpage--, nextpage--;
         DisplayBlog();
+    });
+    // Aside user btn functionilty
+    $(".user-aside-btn").click(LoadUsers());
+    // User edit btn
+    $(document).on("click", ".user-edit-btn", function () {
+        UserId = $(this).data("id");
+        $(".Edit-user-btn").click();
+        $.ajax({
+            type: "GET",
+            url: `/GetUser/${UserId}`,
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            success: function (data) {
+                console.log(data.Image);
+                $("#UserName").val(data.name);
+                $(".User-profile-pic").attr("src", data.Image);
+                $("#UserEmail").val(data.email);
+                $("#UserphoneNo").val(data.phone_no);
+                $("#UserStatus").val(data.status);
+            },
+            error: function (err) {
+                console.log(err);
+            },
+        });
+    });
+    // Update btn Function
+    $(".Update_user_btn").click(function (e) {
+        e.preventDefault();
+        let formData = new FormData($("#EditUserForm")[0]);
+        let name = $("#UserName").val();
+        let email = $("#UserEmail").val();
+        let PhoneNo = $("#UserphoneNo").val();
+        if (!name || !email || !PhoneNo) {
+            ShowError(
+                "Name,Email and Phone Number are required feilds to fill "
+            );
+        } else if (!emailRegex.test(email)) {
+            ShowError("Please enter a valid email address");
+        } else if (PhoneNo.length !== 10) {
+            ShowError("Please enter a valid Phone no");
+        } else {
+            $.ajax({
+                type: "POST",
+                url: `/updateUser/${UserId}`,
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                        "content"
+                    ),
+                },
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    $(".close_usermodal-btn").click();
+                    LoadUsers();
+                    ShowToast(data.message);
+                },
+                error: function (error) {
+                    console.log(error);
+                },
+            });
+        }
+    });
+    // DLT BTN FUNCTION
+    $(document).on("click", ".user-dlt-btn", function () {
+        let UserId = $(this).data("id");
+        $.ajax({
+            type: "DELETE",
+            url: `/deleteUser/${UserId}`,
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            success: function (data) {
+                LoadUsers();
+                ShowToast(data.message);
+            },
+            error: function (error) {
+                console.log(error);
+            },
+        });
+    });
+    // To Get Users by search bar
+    $(".user-serach-btn").click(function (e) {
+        e.preventDefault();
+        let searchValue = $(".user-search-bar").val();
+
+        $.ajax({
+            type: "GET",
+            url: `/GetSearchedUsers/${searchValue}`,
+            success: function (data) {
+                console.log(data);
+                Showpagination(data);
+                $("#user-search-bar").val("");
+                let container = $(".user-aside-table-content");
+                container.empty();
+                $.each(data.users, function (index, User) {
+                    const statusHTML =
+                        User.status === "active"
+                            ? `<td class="px-4 py-3 text-xs">
+                            <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">
+                              Active
+                            </span>
+                          </td>`
+                            : `<td class="px-4 py-3 text-xs">
+                            <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-700">
+                              Block
+                            </span>
+                          </td>`;
+
+                    container.append(`<tr class="text-gray-700 dark:text-gray-400">
+                        <td class="px-4 py-3">
+                          <div class="flex items-center text-sm">
+                            <!-- Avatar with inset shadow -->
+                            <div class="relative hidden w-8 h-8 mr-3 rounded-full md:block">
+                              <img class="object-cover w-full h-full rounded-full" src="${User.Image}" alt="" loading="lazy" />
+                              <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
+                            </div>
+                            <div>
+                              <p class="font-semibold"> ${User.name}</p>
+                            </div>
+                          </div>
+                        </td>
+                        <td class="px-4 py-3 text-sm">
+                          ${User.email}
+                        </td>
+                        <td class="px-4 py-3 text-xs">
+                          <span class="px-2 py-1 text-sm">
+                            ${User.phone_no}
+                          </span>
+                        </td>
+                       
+                        ${statusHTML}
+                     
+                        <td class="px-4 flex justify-center py-3 text-sm blog-action">
+                                    <div class="flex gap-2">
+                                    <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 user-edit-btn" data-id="${User.id}">Edit</button>
+                                    <button type="button" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 user-dlt-btn" data-id="${User.id}">Delete</button>
+                                </div>
+        
+                                    </td>
+                        </tr>
+        
+                      `);
+                });
+            },
+            error: function (err) {
+                console.log(err);
+            },
+        });
     });
 });

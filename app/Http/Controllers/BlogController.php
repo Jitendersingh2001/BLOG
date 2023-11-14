@@ -110,7 +110,7 @@ class BlogController extends Controller
                 $data['BlogImage'] = $targetFileupload;
             }
             if ($blog->update($data)) {
-                return response()->json(['message' => "job updated successfully"]);
+                return response()->json(['message' => "Blog updated successfully"]);
             }
         }
     }

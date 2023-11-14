@@ -28,7 +28,7 @@ Route::get('/', function () {
     return view('Home');
 });
 
-
+// ADMIN ROUTES
 Route::group(['middleware' => ['auth', 'isAdmin']], function () {
     Route::get('/dashboard', function () {
         return view('AdminPanel');
@@ -57,7 +57,13 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+// User Routes
 Route::get('/GetUsers', [AdminController::class, 'getUsers']);
+Route::get('/GetUser/{id}', [AdminController::class, 'GetUser']);
+Route::get('/GetSearchedUsers/{id}', [AdminController::class, 'GetSearchedUser']);
+Route::post('/updateUser/{id}', [AdminController::class, 'UpdateUser']);
+Route::delete('/deleteUser/{id}', [AdminController::class, 'DeleteUser']);
+// Blog Routes
 Route::get('/getCategories', [BlogController::class, 'GetCategory']);
 Route::get('/GetBlogs', [BlogController::class, 'GetBlogs']);
 Route::post('/CreateBlog', [BlogController::class, 'CreateBlog']);

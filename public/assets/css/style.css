@@ -40,3 +40,6 @@ input::-webkit-inner-spin-button {
     border-radius: 0.375rem;
     color: white !important;
 }
+.total-card {
+    width: 25% !important;
+}
