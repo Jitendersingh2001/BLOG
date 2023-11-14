@@ -55,21 +55,22 @@ $(document).ready(function () {
         Showpagination(data);
         let container = $(".user-aside-table-content");
         container.empty();
-        $.each(data, function (index, User) {
-            const statusHTML =
-                User.status === "active"
-                    ? `<td class="px-4 py-3 text-xs">
+        if (data && data.length > 0) {
+            $.each(data, function (index, User) {
+                const statusHTML =
+                    User.status === "active"
+                        ? `<td class="px-4 py-3 text-xs">
                     <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">
                       Active
                     </span>
                   </td>`
-                    : `<td class="px-4 py-3 text-xs">
+                        : `<td class="px-4 py-3 text-xs">
                     <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-700">
                       Block
                     </span>
                   </td>`;
 
-            container.append(`<tr class="text-gray-700 dark:text-gray-400">
+                container.append(`<tr class="text-gray-700 dark:text-gray-400">
                 <td class="px-4 py-3">
                   <div class="flex items-center text-sm">
                     <!-- Avatar with inset shadow -->
@@ -103,7 +104,14 @@ $(document).ready(function () {
                 </tr>
 
               `);
-        });
+            });
+        } else {
+            container.append(`<td class="px-4 py-3 blog-title-container">
+                    <div class="flex items-center text-sm">
+                        <p class="font-semibold blog-title">No User Found </p>
+                    </div>
+                </td>`);
+        }
     }
 
     // Function To Show error toast
@@ -578,21 +586,22 @@ $(document).ready(function () {
                 $("#user-search-bar").val("");
                 let container = $(".user-aside-table-content");
                 container.empty();
-                $.each(data.users, function (index, User) {
-                    const statusHTML =
-                        User.status === "active"
-                            ? `<td class="px-4 py-3 text-xs">
+                if (data && data.length > 0) {
+                    $.each(data.users, function (index, User) {
+                        const statusHTML =
+                            User.status === "active"
+                                ? `<td class="px-4 py-3 text-xs">
                             <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">
                               Active
                             </span>
                           </td>`
-                            : `<td class="px-4 py-3 text-xs">
+                                : `<td class="px-4 py-3 text-xs">
                             <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-700">
                               Block
                             </span>
                           </td>`;
 
-                    container.append(`<tr class="text-gray-700 dark:text-gray-400">
+                        container.append(`<tr class="text-gray-700 dark:text-gray-400">
                         <td class="px-4 py-3">
                           <div class="flex items-center text-sm">
                             <!-- Avatar with inset shadow -->
@@ -626,7 +635,14 @@ $(document).ready(function () {
                         </tr>
         
                       `);
-                });
+                    });
+                } else {
+                    container.append(`<td class="px-4 py-3 blog-title-container">
+                        <div class="flex items-center text-sm">
+                            <p class="font-semibold blog-title">No User Found </p>
+                        </div>
+                    </td>`);
+                }
             },
             error: function (err) {
                 console.log(err);
