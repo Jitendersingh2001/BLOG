@@ -1,5 +1,8 @@
 $(document).ready(function () {
     let userId = $(".id").data("user-id");
+    let currentpage = 0,
+        nextpage = 1,
+        totalPages;
 
     // Function to display user information
     function LoadUserData() {
@@ -16,6 +19,7 @@ $(document).ready(function () {
             },
         });
     }
+    // Function call
     ShowBlogs();
     ShowCategories();
     LoadUserData();
@@ -52,6 +56,7 @@ $(document).ready(function () {
             url: "GetBlogs",
             success: function (data) {
                 // console.log(data);
+                Showpagination(data);
                 DisplayCards(data);
             },
             error: function (err) {
@@ -61,21 +66,25 @@ $(document).ready(function () {
     }
     // funciton to display blogs in a card
     function DisplayCards(data) {
+        console.log(data);
         let BlogContainer = $(".cards-container");
         BlogContainer.empty();
-        if (data && data.length > 0) {
-            $.each(data.slice(0, 16), function (index, Blog) {
-                // Truncate description to three lines
-                let truncatedDescription = Blog.description
-                    .split("\n")
-                    .slice(0, 3)
-                    .join(" ");
-                truncatedDescription =
-                    truncatedDescription.length > 150
-                        ? truncatedDescription.substring(0, 150) + "..."
-                        : truncatedDescription;
 
-                BlogContainer.append(` 
+        if (data && data.length > 0) {
+            $.each(
+                data.slice(currentpage * 16, nextpage * 16),
+                function (index, Blog) {
+                    // Truncate description to three lines
+                    let truncatedDescription = Blog.description
+                        .split("\n")
+                        .slice(0, 3)
+                        .join(" ");
+                    truncatedDescription =
+                        truncatedDescription.length > 150
+                            ? truncatedDescription.substring(0, 150) + "..."
+                            : truncatedDescription;
+
+                    BlogContainer.append(` 
                     <div class="transition-all duration-150 flex w-full blog-card px-4 py-6 md:w-1/2 lg:w-1/3">
                         <div class="flex flex-col items-stretch min-h-full pb-4 mb-6 transition-all duration-150 bg-white rounded-lg shadow-lg hover:shadow-2xl">
                             <div class="md:flex-shrink-0">
@@ -107,7 +116,8 @@ $(document).ready(function () {
                         </div>
                     </div>
                 `);
-            });
+                }
+            );
         } else {
             BlogContainer.append(`
 
@@ -119,6 +129,7 @@ $(document).ready(function () {
             `);
         }
     }
+    // Function to show blogs acc to category
     $(".category-dropdown").on("click", "li", function (event) {
         event.preventDefault();
         let Category = $(this).text().trim();
@@ -129,11 +140,73 @@ $(document).ready(function () {
             success: function (data) {
                 console.log(data);
                 $(".sidebar-close-btn").click();
+                Showpagination(data);
                 DisplayCards(data);
             },
             error: function (error) {
                 console.error("AJAX request failed:", error);
             },
         });
+    });
+
+    // Function to Show pagination
+    function Showpagination(data) {
+        let pageSize = 16;
+        if (data.length > pageSize) {
+            $(".pagination").removeClass("hide");
+        } else {
+            $(".pagination").addClass("hide");
+        }
+
+        totalPages = Math.ceil(data.length / pageSize);
+        if (totalPages > 1) {
+            let pagination = $(".inner-pagenation");
+            pagination.empty();
+            for (let i = 0; i < totalPages; i++) {
+                let buttonClass = i === currentpage ? "active" : "";
+                pagination.append(
+                    `<li>
+                    <button class="page-btn-${i} ${buttonClass} px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
+                        ${i + 1}
+                    </button>
+                </li>`
+                );
+            }
+        }
+
+        // Add event listener for pagination buttons
+        $(".inner-pagenation button").click(function () {
+            currentpage = $(this).text() - 1;
+            nextpage = currentpage + 1;
+            ShowBlogs();
+            updatePaginationButtons();
+        });
+        updatePaginationButtons();
+    }
+
+    // Function to Update Pagination btn
+    function updatePaginationButtons() {
+        $(".nxt-btn")
+            .prop("disabled", nextpage >= totalPages)
+            .toggleClass("disable", nextpage >= totalPages);
+        $(".prv-btn")
+            .prop("disabled", currentpage <= 0)
+            .toggleClass("disable", currentpage <= 0);
+    }
+    // Pagination next btn
+    $(".nxt-btn").click(function () {
+        currentpage++;
+        nextpage++;
+        ShowBlogs();
+        updatePaginationButtons();
+    });
+    // pagination prev btn
+    $(".prv-btn").click(function () {
+        if (currentpage > 0) {
+            currentpage--;
+            nextpage--;
+            ShowBlogs();
+            updatePaginationButtons();
+        }
     });
 });

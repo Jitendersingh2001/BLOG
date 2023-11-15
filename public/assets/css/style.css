@@ -46,3 +46,6 @@ input::-webkit-inner-spin-button {
 .blog-card {
     width: 25% !important;
 }
+.disable {
+    cursor: not-allowed !important;
+}
