@@ -15,11 +15,16 @@ class CategorySeeder extends Seeder
     {
         // Define an array of categories
         $categories = [
-            ['category' => 'Tech'],
-            ['category' => 'Fashion'],
-            ['category' => 'Beauty'],
-            ['category' => 'Health'],
-            ['category' => 'Fitness'],
+            ['category' => 'Business'],
+            ['category' => 'Education'],
+            ['category' => 'Food and Recipe '],
+            ['category' => 'Music'],
+            ['category' => 'Automotive'],
+            ['category' => 'Marketing'],
+            ['category' => 'Internet services'],
+            ['category' => 'Sports'],
+            ['category' => 'Entertainment'],
+            ['category' => 'Agriculture'],
             // Add more categories as needed
         ];
 

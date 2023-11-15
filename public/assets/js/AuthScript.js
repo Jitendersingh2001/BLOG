@@ -59,7 +59,9 @@ $(document).ready(function () {
                     });
                 },
                 error: function (err) {
-                    console.log(err.responseText);
+                    let errorResponse = JSON.parse(err.responseText);
+                    let errorMessage = errorResponse.message;
+                    showErrorToast(errorMessage);
                 },
             });
         }

@@ -66,6 +66,7 @@ Route::delete('/deleteUser/{id}', [AdminController::class, 'DeleteUser']);
 // Blog Routes
 Route::get('/getCategories', [BlogController::class, 'GetCategory']);
 Route::get('/GetBlogs', [BlogController::class, 'GetBlogs']);
+Route::get('/GetCategoryBlogs/{keyword}', [BlogController::class, 'GetCategoryBlogs']);
 Route::post('/CreateBlog', [BlogController::class, 'CreateBlog']);
 Route::get('/editBlog/{id}', [BlogController::class, 'GetBlog']);
 Route::delete('/blog/{id}', [BlogController::class, 'DeleteBlog']);

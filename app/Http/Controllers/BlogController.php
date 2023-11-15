@@ -122,4 +122,9 @@ class BlogController extends Controller
 
         return response()->json($blogs);
     }
+    public function getCategoryBlogs($keyword)
+    {
+        $blogs = Blog::where('category', $keyword)->get();
+        return response()->json($blogs);
+    }
 }
