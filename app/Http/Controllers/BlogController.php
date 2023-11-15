@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Blog;
+use App\Models\view;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 class BlogController extends Controller
 {
@@ -126,5 +128,17 @@ class BlogController extends Controller
     {
         $blogs = Blog::where('category', $keyword)->get();
         return response()->json($blogs);
+    }
+    public function GetSpecificBlog($id)
+    {
+        View::updateOrCreate(
+            ['blog_id' => $id],
+            ['view' => DB::raw('view + 1')],
+            // DB::raw() is used to insert raw SQL expressions into queries. In this case, \DB::raw('view + 1') is a raw SQL expression that increments the value of the 'view' column by 1. It's a way of directly including SQL code within the query.
+            // DB::raw() indicates that you're providing a raw SQL expression.
+            // Inside the parentheses, 'view + 1' is the SQL expression. It means "take the current value of the 'view' column and add 1 to it."
+        );;
+        $blog = Blog::find($id);
+        return view('Blog')->with('blog', $blog);
     }
 }

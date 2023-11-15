@@ -110,7 +110,7 @@ $(document).ready(function () {
                             <hr class="border-gray-300" />
                             <section class="px-4 py-2 mt-2">
                                 <div class="flex items-center justify-end">
-                                    <a href="#" class="mt-1 text-base text-gray-600 hover:text-blue-700">Read More</a>
+                                    <a href="/GetSpecificBlog/${Blog.id}" class="mt-1 text-base text-gray-600 hover:text-blue-700">Read More</a>
                                 </div>
                             </section>
                         </div>

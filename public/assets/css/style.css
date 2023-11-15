@@ -17,13 +17,14 @@ input::-webkit-inner-spin-button {
     -webkit-appearance: none;
 }
 .blog-description {
-    max-height: 52px;
+    /* max-height: 52px;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
-    width: 70% !important;
+    width: 70% !important; */
+    font-size: 25px !important;
 }
 .blog-title-container {
     width: 18% !important;

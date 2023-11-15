@@ -34,8 +34,6 @@ class AuthenticatedSessionController extends Controller
         $redirectUrl = ($userRole == Role::ADMIN) ? route('admin.dashboard') : '/';
         return response()->json(["url" => $redirectUrl]);
     }
-
-
     /**
      * Destroy an authenticated session.
      */

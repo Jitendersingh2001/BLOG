@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
@@ -50,7 +51,7 @@ Route::group(['middleware' => ['auth', 'isAdmin']], function () {
 
 
 Route::get('/Access', function () {
-    return view('Access');
+    return view('AccessDenied');
 });
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -69,7 +70,12 @@ Route::get('/GetBlogs', [BlogController::class, 'GetBlogs']);
 Route::get('/GetCategoryBlogs/{keyword}', [BlogController::class, 'GetCategoryBlogs']);
 Route::post('/CreateBlog', [BlogController::class, 'CreateBlog']);
 Route::get('/editBlog/{id}', [BlogController::class, 'GetBlog']);
+
 Route::delete('/blog/{id}', [BlogController::class, 'DeleteBlog']);
 Route::post('/updateBlog', [BlogController::class, 'UpdateBlog']);
 Route::get('/GetSarchedBlogs/{keyword}', [BlogController::class, 'GetSearchedBlogs']);
+Route::get('/GetSpecificBlog/{id}', [BlogController::class, 'GetSpecificBlog']);
+// Comments Route
+Route::post('/CommentOnBlog', [CommentController::class, 'AddComment']);
+Route::get('/ShowComments/{id}', [CommentController::class, 'GetComment']);
 require __DIR__ . '/auth.php';
