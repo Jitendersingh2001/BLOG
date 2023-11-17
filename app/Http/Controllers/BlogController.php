@@ -12,15 +12,15 @@ use Symfony\Component\HttpFoundation\Response;
 
 class BlogController extends Controller
 {
+    // FUNCTION TO GET BLOG CATEGORIES
     public function GetCategory()
     {
         $category = Category::all();
         return response()->json($category);
     }
+    // FUNCTION TO CREATE BLOG
     public function CreateBlog(request $request)
     {
-
-        // dd($request);
         $title = $request->input('postTitle');
         $description = $request->input('PostContent');
         $category = $request->input('Blogcategory');
@@ -41,21 +41,21 @@ class BlogController extends Controller
             'category' => $category,
             'BlogImage' => $targetFileupload,
         ]);
-
-
-        return response()->json(['message' =>  __('message.BLOG_CREATED')]);
+        return response()->json(['message' =>  __('message.BLOG_CREATED')], RESPONSE::HTTP_OK);
     }
+    // FUNCTION TO GET ALL BLOGS
     public function GetBlogs()
     {
         $blogs = Blog::all();
         return response()->json($blogs);
     }
+    // FUNCTION TO DELETE BLOG
     public function  DeleteBlog($id)
     {
         $blog = Blog::find($id);
 
         if ($blog) {
-            // delete image from storage
+            // delete image from storage using helper function
             DeleteImage($blog->BlogImage);
             $blog->delete();
 
@@ -64,11 +64,13 @@ class BlogController extends Controller
             return response()->json(['message' => __('NOT_FOUND')], Response::HTTP_NOT_FOUND);
         }
     }
+    // FUNCTION TO GET SPECIFIC BLOG
     public function GetBlog($id)
     {
         $blog = Blog::find($id);
         return response()->json(['blogs' => $blog,]);
     }
+    // FUNCTION TO UPDATE BLOG
     public function UpdateBlog(request $request)
     {
         // dd($request);
@@ -89,15 +91,18 @@ class BlogController extends Controller
                 'category' => $category,
             ];
             if ($request->hasFile('BlogImage')) {
+                // delete image from storage using helper function
                 DeleteImage($blog);
+                // Store image in storage using helper function
                 $targetFileupload = StoreImage($request);
                 $data['BlogImage'] = $targetFileupload;
             }
             if ($blog->update($data)) {
-                return response()->json(['message' =>  __('message.BLOG_UPDATED')]);
+                return response()->json(['message' =>  __('message.BLOG_UPDATED')], RESPONSE::HTTP_OK);
             }
         }
     }
+    // FUNCTION TO GET BLOGS ON SEARCH
     public function GetSearchedBlogs($keyword)
     {
         $blogs = Blog::where('title', 'like', '%' . $keyword . '%')
@@ -106,11 +111,13 @@ class BlogController extends Controller
 
         return response()->json($blogs);
     }
+    // FUNCTION TO GET BLOGS ACC TO CATEGORY
     public function getCategoryBlogs($keyword)
     {
         $blogs = Blog::where('category', $keyword)->get();
         return response()->json($blogs);
     }
+    // FUNCTION ADD VIEW COUNT ON SPECIFIC BLOG
     public function GetSpecificBlog($id)
     {
         View::updateOrCreate(
