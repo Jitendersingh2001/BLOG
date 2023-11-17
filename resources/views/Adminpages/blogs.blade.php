@@ -247,27 +247,7 @@
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800 Blog-table-content">
-                        <!-- <tr class="text-gray-700 dark:text-gray-400">
-                            <td class="px-4 py-3">
-                                <div class="flex items-center text-sm">
-                                    <div>
-                                        <p class="font-semibold blog-title">Hans Burger</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="px-4 py-3 text-sm blog-description">
-                                Random@gmail.com
-                            </td>
-                            <td class="px-4 py-3 text-sm blog-category">
-                                computer
-                            </td>
-                            <td class="px-4 py-3 text-sm blog-action">
-                                <div class="flex gap-2">
-                                    <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Default</button>
-                                    <button type="button" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Red</button>
-                                </div>
-                            </td>
-                        </tr> -->
+
                     </tbody>
                 </table>
             </div>

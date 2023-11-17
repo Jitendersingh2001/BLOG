@@ -58,6 +58,7 @@ Route::middleware('auth')->group(function () {
 });
 // User Routes
 Route::get('/GetUsers', [AdminController::class, 'getUsers']);
+Route::get('/admin/total', [AdminController::class, 'getTotalCounts']);
 Route::get('/GetUser/{id}', [AdminController::class, 'GetUser']);
 Route::get('/GetSearchedUsers/{id}', [AdminController::class, 'GetSearchedUser']);
 Route::post('/updateUser/{id}', [AdminController::class, 'UpdateUser']);

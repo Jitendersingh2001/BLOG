@@ -4,30 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\comment;
+use App\Models\Blog;
+use App\Models\view;
 use App\Models\Role;
 use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
 {
-    // public function DeleteImage($user)
-    // {
-    //     $imagePath = $user->Image;
-    //     // dd($imagePath);
-    //     $imagePath = str_replace('/storage', '/', $imagePath);
-    //     if ($imagePath && Storage::disk('public')->exists($imagePath)) {
-    //         Storage::disk('public')->delete($imagePath);
-    //     }
-    // }
-    // //function to store image in storage
-    // public function StoreImage($request): string
-    // {
-    //     $file = $request->file('UserImage');
-    //     $targetDir = storage_path('app/public/upload');
-    //     $targetFileName = time() . '_' . $file->getClientOriginalName();
-    //     $targetFileupload = "/storage/upload/" . $targetFileName;
-    //     $file->move($targetDir, $targetFileName);
-    //     return $targetFileupload;
-    // }
+
     public function getUsers()
     {
         $adminRole = Role::where('role', Role::ADMIN)->first();
@@ -79,5 +64,19 @@ class AdminController extends Controller
         $users = User::where('name', 'like', '%' . $keyword . '%')->get();
 
         return response()->json(['users' => $users]);
+    }
+    public function getTotalCounts()
+    {
+        $totalUsers = User::count();
+        $totalViews = View::sum('view');
+        $totalComments = Comment::count();
+        $totalBlogs = Blog::count();
+
+        return response()->json([
+            'totalUsers' => $totalUsers,
+            'totalViews' => $totalViews,
+            'totalComments' => $totalComments,
+            'totalBlogs' => $totalBlogs,
+        ]);
     }
 }

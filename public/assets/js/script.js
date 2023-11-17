@@ -7,6 +7,28 @@ $(document).ready(function () {
     const emailRegex =
         /^[a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+)*@[a-zA-Z]+(?:\.[a-zA-Z]+)*$/;
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+    // Call OF FUNCTIONS
+    LoadUsers();
+    DisplayCategory();
+    DisplayBlog();
+    total();
+    // FUNCTION TO DISPLAY TOTAL
+    function total() {
+        $.ajax({
+            type: "GET",
+            url: "/admin/total",
+            dataType: "json",
+            success: function (data) {
+                $(".total-views-count").text(data.totalViews);
+                $(".total-blog-count").text(data.totalBlogs);
+                $(".total-user-count").text(data.totalUsers);
+                $(".total-comments-count").text(data.totalComments);
+            },
+            error: function (err) {
+                console.log(err);
+            },
+        });
+    }
     // FUNCTION TO DISPLAY ADMIN DEATILS
     function DisplayAdmin(data) {
         $(".admin-name").val(data.AdminUser.name);
@@ -186,9 +208,7 @@ $(document).ready(function () {
         $("#Blogcategory").val("Choose a category");
         $(".Image-container").empty();
     }
-    LoadUsers();
-    DisplayCategory();
-    DisplayBlog();
+
     // EDIT ADMIN DETAILS
     $(".Admin-profile-edit-btn").click(function (event) {
         event.preventDefault();
