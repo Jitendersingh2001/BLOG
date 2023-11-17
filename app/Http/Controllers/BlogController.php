@@ -8,29 +8,10 @@ use App\Models\Blog;
 use App\Models\view;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
+use Symfony\Component\HttpFoundation\Response;
 
 class BlogController extends Controller
 {
-    // Function to delete image
-    public function DeleteImage($blog)
-    {
-        $imagePath = $blog->BlogImage;
-        // dd($imagePath);
-        $imagePath = str_replace('/storage', '/', $imagePath);
-        if ($imagePath && Storage::disk('public')->exists($imagePath)) {
-            Storage::disk('public')->delete($imagePath);
-        }
-    }
-    //function to store image in storage
-    public function StoreImage($request): string
-    {
-        $file = $request->file('BlogImage');
-        $targetDir = storage_path('app/public/uploads');
-        $targetFileName = time() . '_' . $file->getClientOriginalName();
-        $targetFileupload = "/storage/uploads/" . $targetFileName;
-        $file->move($targetDir, $targetFileName);
-        return $targetFileupload;
-    }
     public function GetCategory()
     {
         $category = Category::all();
@@ -45,7 +26,8 @@ class BlogController extends Controller
         $category = $request->input('Blogcategory');
         $otherCategory = $request->input('OtherCategory');
         if ($request->hasFile('BlogImage')) {
-            $targetFileupload = self::StoreImage($request);
+            $file = $request->file('BlogImage');
+            $targetFileupload = StoreImage($file);
         }
         if ($category === 'Other') {
             $category = $otherCategory;
@@ -61,7 +43,7 @@ class BlogController extends Controller
         ]);
 
 
-        return response()->json(['message' => 'Blog created successfully']);
+        return response()->json(['message' =>  __('message.BLOG_CREATED')]);
     }
     public function GetBlogs()
     {
@@ -74,12 +56,12 @@ class BlogController extends Controller
 
         if ($blog) {
             // delete image from storage
-            self::DeleteImage($blog);
+            DeleteImage($blog->BlogImage);
             $blog->delete();
 
-            return response()->json(['message' => 'Blog deleted successfully']);
+            return response()->json(['message' =>  __('message.BLOG_DELETED')]);
         } else {
-            return response()->json(['message' => 'Blog post not found'], 404);
+            return response()->json(['message' => __('NOT_FOUND')], Response::HTTP_NOT_FOUND);
         }
     }
     public function GetBlog($id)
@@ -107,12 +89,12 @@ class BlogController extends Controller
                 'category' => $category,
             ];
             if ($request->hasFile('BlogImage')) {
-                self::DeleteImage($blog);
-                $targetFileupload = self::StoreImage($request);
+                DeleteImage($blog);
+                $targetFileupload = StoreImage($request);
                 $data['BlogImage'] = $targetFileupload;
             }
             if ($blog->update($data)) {
-                return response()->json(['message' => "Blog updated successfully"]);
+                return response()->json(['message' =>  __('message.BLOG_UPDATED')]);
             }
         }
     }

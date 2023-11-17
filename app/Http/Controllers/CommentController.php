@@ -16,7 +16,7 @@ class CommentController extends Controller
             'comment' => $request->input('text'),
 
         ]);
-        return response()->json(['message' => 'Comment added successfully']);
+        return response()->json(['message' => "Comment" . " " . __('message.ADDED')]);
     }
     public function GetComment($id)
     {

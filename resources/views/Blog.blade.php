@@ -65,6 +65,9 @@
                     </div>
                 </div>
                 @else
+                <div class="id" data-blog-id="{{ $blog->id }}">
+
+                </div>
                 <a href="{{ route('login') }}" class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-3xl text-sm px-4 py-2 text-center me-2 mb-2  ">Log In</a>
                 <a href="{{ route('register') }}" class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-3xl text-sm px-4 py-2 text-center me-2 mb-2  ">Register</a>
                 @endauth
@@ -113,7 +116,7 @@
     <!-- Blog Description -->
     <div class="container mx-auto xl:px-5 max-w-screen-lg py-5 lg:py-8">
         <article class="text-justify">
-            <div class="prose mx-auto my-3 dark:prose-invert prose-a:text-blue-600 blog-description" style="max-width: 100%;">
+            <div class="prose mx-auto my-3 dark:prose-invert prose-a:text-blue-600 description" style="max-width: 100%;">
                 {{$blog->description}}
             </div>
         </article>

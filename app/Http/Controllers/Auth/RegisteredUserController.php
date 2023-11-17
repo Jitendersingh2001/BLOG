@@ -35,10 +35,7 @@ class RegisteredUserController extends Controller
 
         if ($request->hasFile('Image')) {
             $file = $request->file('Image');
-            $targetDir = storage_path('app/public/upload');
-            $targetFileName = time() . '_' . $file->getClientOriginalName();
-            $targetFileupload = "/storage/upload/" . $targetFileName;
-            $file->move($targetDir, $targetFileName);
+            $targetFileupload = StoreImage($file);
         }
         $user = User::create([
             'name' => $request->name,

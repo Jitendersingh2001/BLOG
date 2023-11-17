@@ -17,7 +17,7 @@ use App\Models\Role;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+// DEFAULT ROUTE
 Route::get('/', function () {
     if (Auth::check()) {
         $user = Auth::user();
@@ -47,9 +47,7 @@ Route::group(['middleware' => ['auth', 'isAdmin']], function () {
         return view('Adminpages.profile');
     })->name('admin.profile');
 });
-
-
-
+// ACCESS DENIED ROUTE
 Route::get('/Access', function () {
     return view('AccessDenied');
 });

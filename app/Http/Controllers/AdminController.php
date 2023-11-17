@@ -9,25 +9,25 @@ use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
 {
-    public function DeleteImage($user)
-    {
-        $imagePath = $user->Image;
-        // dd($imagePath);
-        $imagePath = str_replace('/storage', '/', $imagePath);
-        if ($imagePath && Storage::disk('public')->exists($imagePath)) {
-            Storage::disk('public')->delete($imagePath);
-        }
-    }
-    //function to store image in storage
-    public function StoreImage($request): string
-    {
-        $file = $request->file('UserImage');
-        $targetDir = storage_path('app/public/upload');
-        $targetFileName = time() . '_' . $file->getClientOriginalName();
-        $targetFileupload = "/storage/upload/" . $targetFileName;
-        $file->move($targetDir, $targetFileName);
-        return $targetFileupload;
-    }
+    // public function DeleteImage($user)
+    // {
+    //     $imagePath = $user->Image;
+    //     // dd($imagePath);
+    //     $imagePath = str_replace('/storage', '/', $imagePath);
+    //     if ($imagePath && Storage::disk('public')->exists($imagePath)) {
+    //         Storage::disk('public')->delete($imagePath);
+    //     }
+    // }
+    // //function to store image in storage
+    // public function StoreImage($request): string
+    // {
+    //     $file = $request->file('UserImage');
+    //     $targetDir = storage_path('app/public/upload');
+    //     $targetFileName = time() . '_' . $file->getClientOriginalName();
+    //     $targetFileupload = "/storage/upload/" . $targetFileName;
+    //     $file->move($targetDir, $targetFileName);
+    //     return $targetFileupload;
+    // }
     public function getUsers()
     {
         $adminRole = Role::where('role', Role::ADMIN)->first();
@@ -52,12 +52,13 @@ class AdminController extends Controller
         ];
 
         if ($request->hasFile('UserImage')) {
-            self::DeleteImage($user);
-            $targetFileupload = self::StoreImage($request);
+            $file = $request->file('UserImage');
+            DeleteImage($user->Image);
+            $targetFileupload = StoreImage($file);
             $data['Image'] = $targetFileupload;
         }
         if ($user->update($data)) {
-            return response()->json(['message' => "User updated successfully"]);
+            return response()->json(['message' =>  __('message.USER_UPDATED')]);
         }
     }
     public function DeleteUser($id)
@@ -67,10 +68,10 @@ class AdminController extends Controller
 
         if ($user) {
             // delete image from storage
-            self::DeleteImage($user);
+            DeleteImage($user->Image);
             $user->delete();
 
-            return response()->json(['message' => 'User deleted successfully']);
+            return response()->json(['message' =>  __('message.USER_DELETED')]);
         }
     }
     public function GetSearchedUser($keyword)
