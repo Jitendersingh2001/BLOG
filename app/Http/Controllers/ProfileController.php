@@ -29,6 +29,8 @@ class ProfileController extends Controller
         $request->user()->fill($request->validated());
 
         if ($request->user()->isDirty('email')) {
+
+            // In Laravel, the isDirty method is used to determine if any attributes of a model have been changed since the model was loaded or saved.
             $request->user()->email_verified_at = null;
         }
 
@@ -43,6 +45,7 @@ class ProfileController extends Controller
     public function destroy(Request $request): RedirectResponse
     {
         $request->validateWithBag('userDeletion', [
+            // In Laravel, the validateWithBag method is used to perform validation on incoming data and store the validation errors in a specific "error bag." A "bag" is a term used in Laravel to refer to a container for storing data, and in the context of validation errors, a bag is used to store errors for a specific named group or category.
             'password' => ['required', 'current_password'],
         ]);
 
