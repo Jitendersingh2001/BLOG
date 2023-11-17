@@ -4,6 +4,7 @@ $(document).ready(function () {
         currentpage = 0,
         nextpage = 1,
         UserId;
+    console.log($("#user-password").val());
     const emailRegex =
         /^[a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+)*@[a-zA-Z]+(?:\.[a-zA-Z]+)*$/;
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
